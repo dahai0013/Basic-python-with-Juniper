@@ -1,7 +1,7 @@
 import os
 from jnpr.junos import Device
-from jnpr.junos.utils.config import Config
 from jnpr.junos.exception import *
+from jnpr.junos.op.routes import RouteTable
 from pprint import pprint
 
 junos_hosts = [ '192.168.56.15' ]
@@ -10,12 +10,13 @@ for ip in junos_hosts:
     try:
         dev = Device(host=ip, user='lab', password='lab123')
         dev.open()
-        config = Config(dev)
-        config.lock()
-        config.load(path="../files/AddIntf.conf", merge=True)
-        config.pdiff()
-        config.commit()
-        config.unlock()
+        routes = RouteTable(dev)
+        routes.get()
+        for route in routes.keys():
+            if routes[route]['protocol'] == 'DIRECT':
+                print (routes)
+            else:
+                pass
         dev.close()
     except LockError as e:
         print ("The config database was locked!")
