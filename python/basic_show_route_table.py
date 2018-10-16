@@ -13,9 +13,10 @@ for ip in junos_hosts:
         routes = RouteTable(dev)
         routes.get()
         for route in routes.keys():
-            if routes[route]['protocol'] == 'DIRECT':
+            if routes[route]['protocol'] == 'local':
                 print (routes)
             else:
+                print(routes)
                 pass
         dev.close()
     except LockError as e:
