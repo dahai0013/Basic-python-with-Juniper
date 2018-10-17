@@ -3,6 +3,7 @@ bgp:
   as: 65100
   neighbor: 12.12.12.12
   neighbor: 12.12.12.13
+  neighbor: 12.12.12.14
 
 loopback:
   ipaddress: 11.11.11.11
