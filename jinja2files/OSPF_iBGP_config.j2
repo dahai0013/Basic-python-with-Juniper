@@ -1,12 +1,5 @@
-#interface
-interface {
-    em3 {
-        unit 0 {
-            family inet {
-                address {{em3.ipaddress}}/24;
-            }
-        }
-    }
+{# interface #}
+interfaces {
     em4 {
         unit 0 {
             family inet {
@@ -23,13 +16,13 @@ interface {
     }
 }
 
-#OSPF, AS number and BGP
+{# OSPF, AS number and BGP #}
 
 routing-options  {
-    autonomous-system {{as}};
+    autonomous-system {{bgp.as}};
 }
 
-protocol  {
+protocols  {
     bgp {
         group iBGP {
             type internal;
@@ -46,10 +39,5 @@ protocol  {
             interface em4.0;
         }
     }
-    igmp-snooping {
-        vlan default;
-    }
 }
-
-
 

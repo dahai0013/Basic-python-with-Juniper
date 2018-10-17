@@ -1,0 +1,9 @@
+firewall {
+    filter filter{{firewall.filter}} {
+        term term{{firewall.term}} {
+            from {
+                protocol ospf;
+            }
+        }
+    }
+}

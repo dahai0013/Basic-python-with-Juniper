@@ -9,7 +9,8 @@ import sys
 host = 'vQFX1'
 junos_hosts = [ '192.168.56.15' ]
 yaml_file = '../yamlfiles/OSPF_iBGP_config.yaml'
-jinja2_file = '../jinja2files/OSPF_iBGP_config.j2'
+#jinja2_file = '../jinja2files/OSPF_iBGP_config.j2'
+jinja2_file = '../jinja2files/firewall_filter.j2'
 
 for ip in junos_hosts:
     try:
@@ -33,15 +34,15 @@ for ip in junos_hosts:
         print (myConfig)
 
         #write to the Juniper Box
-        #dev = Device(host=ip, user='lab', password='lab123')
-        #dev.open()
-        #config = Config(dev)
-        #config.lock()
-        #config.load(path="../files/AddIntf.conf", merge=True)
-        #config.pdiff()
-        #config.commit()
-        #config.unlock()
-        #dev.close()
+        dev = Device(host=ip, user='lab', password='lab123')
+        dev.open()
+        config = Config(dev)
+        config.lock()
+        config.load(myConfig, merge=True, format="text")
+        config.pdiff()
+        config.commit()
+        config.unlock()
+        dev.close()
     except LockError as e:
         print ("The config database was locked!")
     except ConnectTimeoutError as e:
