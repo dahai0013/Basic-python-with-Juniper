@@ -1,0 +1,63 @@
+#vMX1
+#em3, em4 and em5 are at least available
+
+#Ansible management/control plane interface
+delete interfaces em3.0 family inet dhcp
+set interfaces em3.0 family inet address 192.168.56.15/24
+
+# data plane Interface
+delete interfaces em4.0 family inet dhcp
+set interfaces em4.0 family inet address 10.11.13.11/24
+set interfaces lo0.0 family inet address 11.11.11.11/32
+
+#OSPF
+set protocols ospf area 0.0.0.0 interface lo0.0 passive
+set protocols ospf area 0.0.0.0 interface em3.0
+set protocols ospf area 0.0.0.0 interface em4.0
+
+#BGP configuration
+set routing-options autonomous-system 65100
+set protocols bgp group iBGP type internal
+set protocols bgp group iBGP neighbor 12.12.12.12
+set protocols bgp group iBGP local-address 11.11.11.11
+
+ping 10.11.13.12
+show ospf interface
+show ospf neighbor
+show route protocol ospf
+ping 12.12.12.12
+show bgp summary
+show bgp neighbor
+show route protocol bgp
+
+
+#vMX2
+
+#Ansible management/control plane interface
+delete interfaces em3.0 family inet dhcp
+set interfaces em3.0 family inet address 192.168.56.12/24
+
+#Ansible management/CTRL Plane address
+delete interfaces em4.0 family inet dhcp
+set interfaces em4.0 family inet address 10.11.13.12/24
+set interfaces lo0.0 family inet address 12.12.12.12/32
+
+#OSPF
+set protocols ospf area 0.0.0.0 interface lo0.0 passive
+set protocols ospf area 0.0.0.0 interface em3.0
+set protocols ospf area 0.0.0.0 interface em4.0
+
+#BGP
+set routing-options autonomous-system 65100
+set protocols bgp group iBGP type internal
+set protocols bgp group iBGP neighbor 11.11.11.11
+set protocols bgp group iBGP local-address 12.12.12.12
+
+ping 10.11.13.11
+show ospf neighbor
+show ospf interface
+show route protocol ospf
+ping 11.11.11.11
+show bgp summary
+show bgp neighbor
+show route protocol bgp

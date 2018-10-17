@@ -1,0 +1,22 @@
+#vMX1
+#em3, em4 and em5 are at least available
+
+#Ansible management/control plane interface
+delete interfaces em3.0 family inet dhcp
+set interfaces em3.0 family inet address {{em3.ipaddress}}/24
+
+# data plane Interface
+delete interfaces em4.0 family inet dhcp
+set interfaces em4.0 family inet address {{em4.ipaddress}}/24
+set interfaces lo0.0 family inet address {{loopback.ipaddress}}/32
+
+#OSPF
+set protocols ospf area 0.0.0.0 interface lo0.0 passive
+set protocols ospf area 0.0.0.0 interface em3.0
+set protocols ospf area 0.0.0.0 interface em4.0
+
+#BGP configuration
+set routing-options autonomous-system {{bgp.as}}
+set protocols bgp group iBGP type internal
+set protocols bgp group iBGP neighbor {{bgp.neighbor}}
+set protocols bgp group iBGP local-address {{loopback.ipaddress}}

@@ -1,0 +1,57 @@
+#interface
+interface {
+    em3 {
+        unit 0 {
+            family inet {
+                address {{em3.ipaddress}}/24;
+            }
+        }
+    }
+    em4 {
+        unit 0 {
+            family inet {
+                address {{em4.ipaddress}}/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address {{loopback.ipaddress}}/32;
+            }
+        }
+    }
+}
+
+#OSPF
+#AS#
+#BGP
+
+routing-options  {
+    autonomous-system {{as}};
+}
+
+protocol  {
+    bgp {
+        group iBGP {
+            type internal;
+            local-address {{loopback.ipaddress}};
+            neighbor {{bgp.neighbor}};
+        }
+    }
+    ospf {
+        area 0.0.0.0 {
+            interface lo0.0 {
+                passive;
+            }
+            interface em3.0;
+            interface em4.0;
+        }
+    }
+    igmp-snooping {
+        vlan default;
+    }
+}
+
+
+

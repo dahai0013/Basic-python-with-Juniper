@@ -1,0 +1,13 @@
+---
+bgp:
+  as: 65100
+  neighbor: 12.12.12.12
+
+loopback:
+  ipaddress: 11.11.11.11
+
+em3:
+  ipaddress: 192.168.56.15
+
+em4:
+  ipaddress: 10.13.12.15
