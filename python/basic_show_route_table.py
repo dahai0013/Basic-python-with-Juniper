@@ -1,4 +1,4 @@
-import os
+import sys
 from jnpr.junos import Device
 from jnpr.junos.exception import *
 from jnpr.junos.op.routes import RouteTable
