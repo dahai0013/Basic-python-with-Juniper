@@ -1,0 +1,11 @@
+
+interfaces {
+    ae0 {
+        unit 4 {
+            vlan-id 4;
+            family inet {
+                address 17.0.4.1/24;
+            }
+        }
+    }
+}

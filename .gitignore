@@ -1,0 +1,15 @@
+
+*.iml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/Project_Default.xml
+Napalm/credential_napalm.yaml
+.idea/encodings.xml
+Napalm/basic_config.py
+Napalm/credential_napalm.yaml
+.idea/inspectionProfiles/Project_Default.xml
